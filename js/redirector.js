@@ -121,9 +121,24 @@ function updateAvailableGames(progress) {
 		// Check if all dependencies are completed
 		const canAccess = dependencies.every(dep => progress[dep] === 'completed');
 
-		// Get the game element
-		const gameElement = document.querySelector(`.game-item[data-game="${gameId}"]`) ||
-			document.querySelector(`.game-title:contains("${getGameTitle(gameId)}")`).closest('.game-item');
+		// Get the game element - FIX: Use standard DOM methods instead of :contains selector
+		let gameElement = null;
+
+		// Find game item by data attribute if it exists
+		const gameElementByData = document.querySelector(`.game-item[data-game="${gameId}"]`);
+		if (gameElementByData) {
+			gameElement = gameElementByData;
+		} else {
+			// Otherwise find by matching title text
+			const title = getGameTitle(gameId);
+			const gameTitles = document.querySelectorAll('.game-title');
+			for (let i = 0; i < gameTitles.length; i++) {
+				if (gameTitles[i].textContent.includes(title)) {
+					gameElement = gameTitles[i].closest('.game-item');
+					break;
+				}
+			}
+		}
 
 		// If game element found, update its state
 		if (gameElement) {
@@ -135,7 +150,7 @@ function updateAvailableGames(progress) {
 				const lockSpan = gameElement.querySelector('.game-lock');
 				if (lockSpan) {
 					const linkElement = document.createElement('a');
-					linkElement.href = `https://AlexViking.github.io/game-${gameId}?student=${localStorage.getItem('studentId')}`;
+					linkElement.href = `https://example.github.io/game-${gameId}?student=${localStorage.getItem('studentId')}`;
 					linkElement.className = 'game-link';
 					linkElement.textContent = 'Start Game';
 
@@ -257,28 +272,4 @@ function getGameTitle(gameId) {
 	};
 
 	return gameTitles[gameId] || gameId;
-}
-
-/**
- * Helper function for querySelector with contains
- */
-Element.prototype.querySelector = function (selector) {
-	return document.querySelector(selector);
-};
-
-// Add contains selector to querySelector
-if (!Element.prototype.matches) {
-	Element.prototype.matches = Element.prototype.msMatchesSelector ||
-		Element.prototype.webkitMatchesSelector;
-}
-
-if (!Element.prototype.closest) {
-	Element.prototype.closest = function (s) {
-		var el = this;
-		do {
-			if (el.matches(s)) return el;
-			el = el.parentElement || el.parentNode;
-		} while (el !== null && el.nodeType === 1);
-		return null;
-	};
 }
