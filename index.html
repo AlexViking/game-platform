@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<title>Learning Game Platform</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<h1>Web Development Learning Platform</h1>
+			<p>Learn coding skills through interactive games</p>
+		</div>
+	</header>
+
+	<main class="container">
+		<section id="welcome">
+			<h2>Welcome to the Learning Platform</h2>
+			<p>This platform offers interactive games to help you build real-world web development skills. Complete
+				challenges to earn achievement keys that will automatically update your CV with verified skills.</p>
+		</section>
+
+		<section id="learning-paths">
+			<h2>Learning Paths</h2>
+			<div class="path-grid">
+				<div class="path-card beginner active">
+					<div class="path-header">
+						<h3>Beginner Path</h3>
+						<span class="path-status">Current Level</span>
+					</div>
+					<div class="path-description">
+						<p>Start your web development journey with the fundamentals.</p>
+					</div>
+					<div class="path-games">
+						<div class="game-item available">
+							<span class="game-icon">🌐</span>
+							<span class="game-title">The Internet Basics</span>
+							<a href="https://AlexViking.github.io/game-internet-basics" class="game-link">Start Game</a>
+						</div>
+						<div class="game-item locked">
+							<span class="game-icon">📄</span>
+							<span class="game-title">HTML Fundamentals</span>
+							<span class="game-lock">Complete previous game first</span>
+						</div>
+						<div class="game-item locked">
+							<span class="game-icon">🎨</span>
+							<span class="game-title">CSS Styling</span>
+							<span class="game-lock">Complete previous games first</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="path-card intermediate">
+					<div class="path-header">
+						<h3>Intermediate Path</h3>
+						<span class="path-status">Locked</span>
+					</div>
+					<div class="path-description">
+						<p>Enhance your skills with interactive programming and dynamic web techniques.</p>
+					</div>
+					<div class="path-games">
+						<div class="game-item locked">
+							<span class="game-icon">📜</span>
+							<span class="game-title">JavaScript Basics</span>
+							<span class="game-lock">Complete Beginner Path first</span>
+						</div>
+						<div class="game-item locked">
+							<span class="game-icon">🖱️</span>
+							<span class="game-title">DOM Manipulation</span>
+							<span class="game-lock">Complete previous games first</span>
+						</div>
+						<div class="game-item locked">
+							<span class="game-icon">⚙️</span>
+							<span class="game-title">Web APIs</span>
+							<span class="game-lock">Complete previous games first</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="path-card advanced">
+					<div class="path-header">
+						<h3>Advanced Path</h3>
+						<span class="path-status">Locked</span>
+					</div>
+					<div class="path-description">
+						<p>Master professional development techniques and frameworks.</p>
+					</div>
+					<div class="path-games">
+						<div class="game-item locked">
+							<span class="game-icon">📦</span>
+							<span class="game-title">Modern JS Frameworks</span>
+							<span class="game-lock">Complete Intermediate Path first</span>
+						</div>
+						<div class="game-item locked">
+							<span class="game-icon">💾</span>
+							<span class="game-title">Backend Basics</span>
+							<span class="game-lock">Complete previous games first</span>
+						</div>
+						<div class="game-item locked">
+							<span class="game-icon">🔄</span>
+							<span class="game-title">Full Stack Development</span>
+							<span class="game-lock">Complete previous games first</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="progress">
+			<h2>Your Progress</h2>
+			<div class="progress-container">
+				<div class="progress-empty">
+					<p>Sign in with your student ID to track progress across games.</p>
+					<form id="student-id-form">
+						<div class="form-group">
+							<input class="pixel-input" type="text" id="student-id"
+								placeholder="Enter your GitHub username">
+							<button type="submit" class="pixel-btn">Sign In</button>
+						</div>
+					</form>
+				</div>
+				<!-- Progress will be shown here after sign-in -->
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>© 2025 Gamified CV Learning Platform</p>
+			<p><small>This platform is part of a student learning project and runs entirely on GitHub Pages.</small></p>
+		</div>
+	</footer>
+
+	<script src="js/redirector.js"></script>
+</body>
+
+</html>
