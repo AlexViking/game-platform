@@ -1,15 +1,27 @@
 /**
- * Game Platform Redirector
- * Handles game redirection and progress tracking
+ * Game Platform Redirector - Enhanced for circular flow
+ * Handles game redirection, progress tracking, and returns to CV
  */
 
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
-	// Check for student ID in localStorage
-	const studentId = localStorage.getItem('studentId');
+	// Get URL parameters
+	const urlParams = new URLSearchParams(window.location.search);
+	const studentId = urlParams.get('student') || localStorage.getItem('studentId');
+	const completedGames = JSON.parse(urlParams.get('completed') || '[]');
+	const returnUrl = urlParams.get('return_url');
+
+	// Store return URL and student ID
+	if (returnUrl) {
+		localStorage.setItem('cvReturnUrl', returnUrl);
+	}
 	if (studentId) {
+		localStorage.setItem('studentId', studentId);
 		showStudentProgress(studentId);
 	}
+
+	// Update available games based on completed games
+	updateAvailableGamesFromCV(completedGames);
 
 	// Handle student ID form submission
 	document.getElementById('student-id-form').addEventListener('submit', function (e) {
@@ -23,14 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
-	// Handle URL parameters for tracking
-	const urlParams = new URLSearchParams(window.location.search);
+	// If coming back from a completed game
 	const source = urlParams.get('source');
 	const completed = urlParams.get('completed');
+	const newKey = urlParams.get('key');
 
-	// If coming back from a completed game
-	if (source && completed === 'true') {
+	if (source && completed === 'true' && newKey) {
 		handleGameCompletion(source);
+
+		// Show return to CV button
+		showReturnToCV(newKey);
 	}
 });
 
@@ -102,6 +116,20 @@ function showStudentProgress(studentId) {
 }
 
 /**
+ * Update game availability based on progress from CV
+ */
+function updateAvailableGamesFromCV(completedGames) {
+	// Create progress object from completed games
+	const progress = {};
+	completedGames.forEach(gameId => {
+		progress[gameId] = 'completed';
+	});
+
+	// Update available games
+	updateAvailableGames(progress);
+}
+
+/**
  * Update game availability based on progress
  * @param {Object} progress - The student's progress data
  */
@@ -121,40 +149,29 @@ function updateAvailableGames(progress) {
 		// Check if all dependencies are completed
 		const canAccess = dependencies.every(dep => progress[dep] === 'completed');
 
-		// Get the game element - FIX: Use standard DOM methods instead of :contains selector
-		let gameElement = null;
-
-		// Find game item by data attribute if it exists
-		const gameElementByData = document.querySelector(`.game-item[data-game="${gameId}"]`);
-		if (gameElementByData) {
-			gameElement = gameElementByData;
-		} else {
-			// Otherwise find by matching title text
-			const title = getGameTitle(gameId);
-			const gameTitles = document.querySelectorAll('.game-title');
-			for (let i = 0; i < gameTitles.length; i++) {
-				if (gameTitles[i].textContent.includes(title)) {
-					gameElement = gameTitles[i].closest('.game-item');
-					break;
-				}
-			}
-		}
+		// Get the game element
+		let gameElement = findGameElement(gameId);
 
 		// If game element found, update its state
 		if (gameElement) {
-			if (canAccess) {
+			if (canAccess || progress[gameId] === 'completed') {
 				gameElement.classList.remove('locked');
 				gameElement.classList.add('available');
 
 				// Replace lock text with link
 				const lockSpan = gameElement.querySelector('.game-lock');
-				if (lockSpan) {
-					const linkElement = document.createElement('a');
-					linkElement.href = `https://example.github.io/game-${gameId}?student=${localStorage.getItem('studentId')}`;
-					linkElement.className = 'game-link';
-					linkElement.textContent = 'Start Game';
+				const linkElement = gameElement.querySelector('.game-link');
 
-					lockSpan.parentNode.replaceChild(linkElement, lockSpan);
+				if (lockSpan && !linkElement) {
+					const newLink = document.createElement('button');
+					newLink.className = 'game-link';
+					newLink.textContent = 'Start Game';
+					newLink.onclick = () => startGame(gameId, progress[gameId] === 'completed');
+
+					lockSpan.parentNode.replaceChild(newLink, lockSpan);
+				} else if (linkElement) {
+					// Update existing link
+					linkElement.onclick = () => startGame(gameId, progress[gameId] === 'completed');
 				}
 			}
 		}
@@ -162,6 +179,83 @@ function updateAvailableGames(progress) {
 
 	// Update path status based on progress
 	updatePathStatus(progress);
+}
+
+/**
+ * Find game element by game ID
+ */
+function findGameElement(gameId) {
+	const title = getGameTitle(gameId);
+	const gameTitles = document.querySelectorAll('.game-title');
+
+	for (const titleElement of gameTitles) {
+		if (titleElement.textContent === title) {
+			return titleElement.closest('.game-item');
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Start a game with previous attempts data
+ */
+function startGame(gameId, isRetake = false) {
+	const studentId = localStorage.getItem('studentId');
+	const previousAttempts = JSON.parse(localStorage.getItem(`attempts_${studentId}_${gameId}`) || '[]');
+
+	// Build game URL
+	const gameUrl = new URL(`https://AlexViking.github.io/game-${gameId}`);
+	gameUrl.searchParams.append('student', studentId);
+	gameUrl.searchParams.append('isRetake', isRetake);
+	gameUrl.searchParams.append('attempts', JSON.stringify(previousAttempts));
+	gameUrl.searchParams.append('platform_return', window.location.href);
+
+	// Navigate in same tab
+	window.location.href = gameUrl.toString();
+}
+
+/**
+ * Show return to CV button
+ */
+function showReturnToCV(key) {
+	const returnUrl = localStorage.getItem('cvReturnUrl');
+	if (!returnUrl) return;
+
+	// Create return button section
+	const returnSection = document.createElement('section');
+	returnSection.innerHTML = `
+		<h2>Achievement Unlocked! 🎉</h2>
+		<p>You've earned a new achievement key. Click below to return to your CV and add it.</p>
+		<div class="key-container">
+			<code id="key-display">${key}</code>
+			<button onclick="copyKey('${key}')" class="btn btn-small">Copy</button>
+		</div>
+		<button id="return-to-cv" class="pixel-btn">Return to Your CV Template</button>
+	`;
+
+	document.querySelector('main').insertBefore(returnSection, document.querySelector('main').firstChild);
+
+	// Add click handler
+	document.getElementById('return-to-cv').addEventListener('click', () => {
+		const url = new URL(returnUrl);
+		url.searchParams.append('key', key);
+		window.location.href = url.toString();
+	});
+}
+
+/**
+ * Copy key to clipboard
+ */
+function copyKey(key) {
+	navigator.clipboard.writeText(key).then(() => {
+		const button = event.target;
+		const originalText = button.textContent;
+		button.textContent = 'Copied!';
+		setTimeout(() => {
+			button.textContent = originalText;
+		}, 2000);
+	});
 }
 
 /**
