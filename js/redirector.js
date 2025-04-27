@@ -203,6 +203,7 @@ function findGameElement(gameId) {
 function startGame(gameId, isRetake = false) {
 	const studentId = localStorage.getItem('studentId');
 	const previousAttempts = JSON.parse(localStorage.getItem(`attempts_${studentId}_${gameId}`) || '[]');
+	const cvReturnUrl = localStorage.getItem('cvReturnUrl');
 
 	// Build game URL
 	const gameUrl = new URL(`https://AlexViking.github.io/game-${gameId}`);
@@ -210,6 +211,11 @@ function startGame(gameId, isRetake = false) {
 	gameUrl.searchParams.append('isRetake', isRetake);
 	gameUrl.searchParams.append('attempts', JSON.stringify(previousAttempts));
 	gameUrl.searchParams.append('platform_return', window.location.href);
+
+	// Pass CV return URL to the game
+	if (cvReturnUrl) {
+		gameUrl.searchParams.append('cv_return', cvReturnUrl);
+	}
 
 	// Navigate in same tab
 	window.location.href = gameUrl.toString();
