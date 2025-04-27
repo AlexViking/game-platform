@@ -1,0 +1,46 @@
+<!-- Debug Panel Component -->
+<div id="debug-panel" class="debug-panel hidden">
+	<div class="debug-header">
+		<h3 class="pixel-text">DEBUG CONSOLE</h3>
+		<button id="debug-close" class="pixel-btn-small">×</button>
+	</div>
+
+	<div class="debug-tabs">
+		<button class="debug-tab active" data-tab="flow">Flow</button>
+		<button class="debug-tab" data-tab="storage">Storage</button>
+		<button class="debug-tab" data-tab="navigation">Navigation</button>
+		<button class="debug-tab" data-tab="keys">Keys</button>
+		<button class="debug-tab" data-tab="logs">Logs</button>
+	</div>
+
+	<div class="debug-content">
+		<!-- Flow visualization tab -->
+		<div id="debug-flow" class="debug-tab-content active">
+			<div class="flow-visualization">
+				<!-- Flow steps will be dynamically added here -->
+			</div>
+		</div>
+
+		<!-- Storage tab -->
+		<div id="debug-storage" class="debug-tab-content">
+			<pre id="storage-view"></pre>
+		</div>
+
+		<!-- Navigation tab -->
+		<div id="debug-navigation" class="debug-tab-content">
+			<div id="nav-history"></div>
+		</div>
+
+		<!-- Keys tab -->
+		<div id="debug-keys" class="debug-tab-content">
+			<div id="key-list"></div>
+		</div>
+
+		<!-- Logs tab -->
+		<div id="debug-logs" class="debug-tab-content">
+			<div id="log-entries"></div>
+		</div>
+	</div>
+</div>
+
+<!-- Debug panel styles and scripts can be loaded dynamically -->

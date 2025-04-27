@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 	<title>Learning Game Platform</title>
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="platform/css/platform.css">
+	<link rel="stylesheet" href="platform/css/debug.css">
 </head>
 
 <body>
@@ -39,7 +40,8 @@
 						<div class="game-item available">
 							<span class="game-icon">🌐</span>
 							<span class="game-title">The Internet Basics</span>
-							<button class="game-link" onclick="startGame('internet-basics')">Start Game</button>
+							<button class="game-link" onclick="platformRouter.startGame('internet-basics')">Start
+								Game</button>
 						</div>
 						<div class="game-item locked">
 							<span class="game-icon">📄</span>
@@ -113,17 +115,9 @@
 		<section id="progress">
 			<h2>Your Progress</h2>
 			<div class="progress-container">
-				<div class="progress-empty">
-					<p>Sign in with your student ID to track progress across games.</p>
-					<form id="student-id-form">
-						<div class="form-group">
-							<input class="pixel-input" type="text" id="student-id"
-								placeholder="Enter your GitHub username">
-							<button type="submit" class="pixel-btn">Sign In</button>
-						</div>
-					</form>
+				<div id="progress-content">
+					<!-- Progress will be loaded dynamically -->
 				</div>
-				<!-- Progress will be shown here after sign-in -->
 			</div>
 		</section>
 	</main>
@@ -132,10 +126,15 @@
 		<div class="container">
 			<p>© 2025 Gamified CV Learning Platform</p>
 			<p><small>This platform is part of a student learning project and runs entirely on GitHub Pages.</small></p>
+			<button id="debug-mode-toggle" class="debug-toggle-btn">Debug</button>
 		</div>
 	</footer>
 
-	<script src="js/redirector.js"></script>
+	<script src="platform/config/platform-config.js"></script>
+	<script src="platform/js/platform-utils.js"></script>
+	<script src="platform/js/platform-debug.js"></script>
+	<script src="platform/js/platform-progress.js"></script>
+	<script src="platform/js/platform-router.js"></script>
 </body>
 
 </html>

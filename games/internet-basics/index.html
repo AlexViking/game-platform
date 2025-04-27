@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<title>The Internet Basics - Learning Game</title>
+	<link rel="stylesheet" href="../shared/css/game-base.css">
+	<link rel="stylesheet" href="../shared/css/pixel-theme.css">
+	<link rel="stylesheet" href="../shared/css/debug.css">
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<h1>The Internet Basics</h1>
+			<div class="game-progress">
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 0%"></div>
+				</div>
+				<span class="progress-text">0% Complete</span>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section id="game-intro" class="game-section active">
+			<h2>Welcome to The Internet Basics</h2>
+			<p>This game will teach you how the internet works, from basic networking concepts to how browsers
+				communicate with servers.</p>
+			<p>Complete all challenges to earn an achievement key for your CV!</p>
+			<button id="start-game" class="pixel-btn">Start Learning</button>
+		</section>
+
+		<section id="lesson-1" class="game-section">
+			<h2>Lesson 1: What is the Internet?</h2>
+			<div class="lesson-content">
+				<p>The Internet is a global network of interconnected computers that communicate using standardized
+					protocols.</p>
+
+				<div class="interactive-diagram">
+					<div class="diagram-container">
+						<!-- Placeholder for network diagram -->
+						<div class="pixel-diagram">
+							[Network Diagram Visualization]
+						</div>
+					</div>
+					<div class="diagram-description">
+						<p>The internet consists of:</p>
+						<ul>
+							<li><strong>Clients</strong>: Computers, phones, and other devices used by people</li>
+							<li><strong>Servers</strong>: Computers that store and provide information</li>
+							<li><strong>Routers</strong>: Devices that direct traffic between networks</li>
+							<li><strong>ISPs</strong>: Internet Service Providers that connect you to the network</li>
+						</ul>
+					</div>
+				</div>
+
+				<p>When you access a website, your device (client) sends a request through this network to a server,
+					which responds with the requested information.</p>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="quiz-1">Continue to Quiz</button>
+			</div>
+		</section>
+
+		<section id="quiz-1" class="game-section">
+			<h2>Quiz: Internet Basics</h2>
+			<div class="quiz-container">
+				<div class="question">
+					<p>Which of these is NOT a key component of the internet?</p>
+					<div class="options">
+						<label class="option">
+							<input type="radio" name="q1" value="clients"> Clients
+						</label>
+						<label class="option">
+							<input type="radio" name="q1" value="servers"> Servers
+						</label>
+						<label class="option">
+							<input type="radio" name="q1" value="compilers"> Compilers
+						</label>
+						<label class="option">
+							<input type="radio" name="q1" value="routers"> Routers
+						</label>
+					</div>
+					<div class="feedback"></div>
+				</div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check" data-question="q1" data-answer="compilers">Check Answer</button>
+				<button class="btn btn-next" data-next="lesson-2" style="display: none;">Next Lesson</button>
+			</div>
+		</section>
+
+		<section id="lesson-2" class="game-section">
+			<h2>Lesson 2: How HTTP Works</h2>
+			<div class="lesson-content">
+				<p>HTTP (Hypertext Transfer Protocol) is the foundation of data communication on the web. It's how
+					browsers and servers talk to each other.</p>
+
+				<div class="http-demo">
+					<div class="http-flow">
+						<div class="http-client">
+							<div class="device-icon">💻</div>
+							<div class="device-label">Client</div>
+						</div>
+
+						<div class="http-arrows">
+							<div class="arrow-right">
+								<span class="arrow-body">→</span>
+								<span class="arrow-label">HTTP Request</span>
+							</div>
+							<div class="arrow-left">
+								<span class="arrow-body">←</span>
+								<span class="arrow-label">HTTP Response</span>
+							</div>
+						</div>
+
+						<div class="http-server">
+							<div class="device-icon">🖥️</div>
+							<div class="device-label">Server</div>
+						</div>
+					</div>
+
+					<div class="http-details">
+						<div class="http-request">
+							<h4>HTTP Request Example:</h4>
+							<pre><code>GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Accept: text/html</code></pre>
+						</div>
+
+						<div class="http-response">
+							<h4>HTTP Response Example:</h4>
+							<pre><code>HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+
+<!DOCTYPE html>
+<html>...</html></code></pre>
+						</div>
+					</div>
+				</div>
+
+				<p>Each HTTP request contains:</p>
+				<ul>
+					<li>A method (GET, POST, etc.)</li>
+					<li>A URL path</li>
+					<li>HTTP version</li>
+					<li>Headers with additional information</li>
+				</ul>
+
+				<p>Each HTTP response contains:</p>
+				<ul>
+					<li>Status code (200 OK, 404 Not Found, etc.)</li>
+					<li>Headers with metadata</li>
+					<li>The requested content</li>
+				</ul>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="quiz-2">Continue to Quiz</button>
+			</div>
+		</section>
+
+		<section id="quiz-2" class="game-section">
+			<h2>Quiz: HTTP Protocol</h2>
+			<div class="quiz-container">
+				<div class="question">
+					<p>Which HTTP status code indicates a successful request?</p>
+					<div class="options">
+						<label class="option">
+							<input type="radio" name="q2" value="404"> 404
+						</label>
+						<label class="option">
+							<input type="radio" name="q2" value="500"> 500
+						</label>
+						<label class="option">
+							<input type="radio" name="q2" value="200"> 200
+						</label>
+						<label class="option">
+							<input type="radio" name="q2" value="302"> 302
+						</label>
+					</div>
+					<div class="feedback"></div>
+				</div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check" data-question="q2" data-answer="200">Check Answer</button>
+				<button class="btn btn-next" data-next="lesson-3" style="display: none;">Next Lesson</button>
+			</div>
+		</section>
+
+		<section id="lesson-3" class="game-section">
+			<h2>Lesson 3: How Browsers Work</h2>
+			<div class="lesson-content">
+				<p>Web browsers are the software applications we use to access websites. They interpret HTML, CSS, and
+					JavaScript to render web pages.</p>
+
+				<div class="browser-workflow">
+					<h4>Browser Rendering Process:</h4>
+					<div class="workflow-steps">
+						<div class="workflow-step">
+							<div class="step-number">1</div>
+							<div class="step-content">
+								<h5>Parse HTML</h5>
+								<p>Browser reads HTML and creates DOM (Document Object Model)</p>
+							</div>
+						</div>
+
+						<div class="workflow-step">
+							<div class="step-number">2</div>
+							<div class="step-content">
+								<h5>Load Resources</h5>
+								<p>Fetch CSS, JavaScript, images, and other resources</p>
+							</div>
+						</div>
+
+						<div class="workflow-step">
+							<div class="step-number">3</div>
+							<div class="step-content">
+								<h5>Parse CSS</h5>
+								<p>Create CSSOM (CSS Object Model)</p>
+							</div>
+						</div>
+
+						<div class="workflow-step">
+							<div class="step-number">4</div>
+							<div class="step-content">
+								<h5>Execute JavaScript</h5>
+								<p>Run scripts that may modify DOM and CSSOM</p>
+							</div>
+						</div>
+
+						<div class="workflow-step">
+							<div class="step-number">5</div>
+							<div class="step-content">
+								<h5>Render Tree</h5>
+								<p>Combine DOM and CSSOM into a render tree</p>
+							</div>
+						</div>
+
+						<div class="workflow-step">
+							<div class="step-number">6</div>
+							<div class="step-content">
+								<h5>Layout</h5>
+								<p>Calculate position and size of all elements</p>
+							</div>
+						</div>
+
+						<div class="workflow-step">
+							<div class="step-number">7</div>
+							<div class="step-content">
+								<h5>Paint</h5>
+								<p>Convert layout to pixels on the screen</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p>This process happens every time you load a webpage, and parts of it repeat when you interact with the
+					page (clicking buttons, scrolling, etc.).</p>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="interactive-demo">Continue to Interactive Demo</button>
+			</div>
+		</section>
+
+		<section id="interactive-demo" class="game-section">
+			<h2>Interactive Demo: HTTP Request-Response Cycle</h2>
+			<div class="lesson-content">
+				<p>Let's see the HTTP request-response cycle in action. Click the browser button to simulate requesting
+					a webpage.</p>
+
+				<div class="interactive-simulation">
+					<div class="simulation-controls">
+						<button id="sim-request-btn" class="pixel-btn">Send HTTP Request</button>
+						<div class="simulation-speed">
+							<label for="sim-speed">Simulation Speed:</label>
+							<select id="sim-speed">
+								<option value="slow">Slow (educational)</option>
+								<option value="medium" selected>Medium</option>
+								<option value="fast">Fast (realistic)</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="simulation-stage">
+						<div class="sim-browser">
+							<div class="sim-browser-bar">
+								<span class="sim-url">https://example.com</span>
+							</div>
+							<div class="sim-browser-content">
+								<div class="sim-loading">Loading...</div>
+								<div class="sim-content" style="display:none;">
+									<h3>Example Website</h3>
+									<p>This is a simulated webpage received from the server.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="sim-network">
+							<div class="sim-request-packet">
+								<div class="packet-label">HTTP Request</div>
+							</div>
+							<div class="sim-response-packet">
+								<div class="packet-label">HTTP Response</div>
+							</div>
+						</div>
+
+						<div class="sim-server">
+							<div class="server-icon">🖥️</div>
+							<div class="server-label">Server</div>
+							<div class="server-status">Ready</div>
+						</div>
+					</div>
+
+					<div class="simulation-log">
+						<h4>Network Log:</h4>
+						<div class="log-entries"></div>
+					</div>
+				</div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="challenge" style="display: none;">Continue to Challenge</button>
+			</div>
+		</section>
+
+		<section id="challenge" class="game-section">
+			<h2>Final Challenge: Network Troubleshooting</h2>
+			<div class="challenge-container">
+				<p>A website isn't working correctly. Examine the network logs and identify the issue.</p>
+
+				<div class="troubleshooting-scenario">
+					<div class="scenario-description">
+						<p>You're trying to access <strong>www.learning-platform.com</strong> but the page isn't loading
+							correctly. The browser shows an error.</p>
+					</div>
+
+					<div class="network-log">
+						<pre><code>10:15:32 - Resolving DNS for www.learning-platform.com
+10:15:33 - DNS resolved to 192.168.1.42
+10:15:33 - Establishing connection to 192.168.1.42
+10:15:34 - Connection established
+10:15:34 - Sending HTTP request: GET /index.html HTTP/1.1
+10:15:35 - Received response: HTTP/1.1 404 Not Found
+10:15:35 - Error loading page</code></pre>
+					</div>
+
+					<div class="scenario-question">
+						<p>What is the issue causing the page to not load?</p>
+						<div class="options">
+							<label class="option">
+								<input type="radio" name="challenge" value="dns"> DNS resolution failure
+							</label>
+							<label class="option">
+								<input type="radio" name="challenge" value="connection"> Connection timeout
+							</label>
+							<label class="option">
+								<input type="radio" name="challenge" value="404"> 404 Not Found error
+							</label>
+							<label class="option">
+								<input type="radio" name="challenge" value="server"> Server is down
+							</label>
+						</div>
+						<div class="feedback"></div>
+					</div>
+				</div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check-challenge">Check Answer</button>
+				<button class="btn btn-complete" style="display: none;">Complete Game</button>
+			</div>
+		</section>
+
+		<section id="game-complete" class="game-section">
+			<h2>Congratulations! 🎉</h2>
+			<p>You've completed The Internet Basics learning game!</p>
+			<div class="achievement-container">
+				<h3>Your Achievement Key</h3>
+				<div class="key-container">
+					<code id="achievement-key"></code>
+					<button id="copy-key" class="btn btn-small">Copy</button>
+				</div>
+				<p>This key will be automatically sent to your CV when you return to the platform.</p>
+			</div>
+			<div class="navigation-buttons">
+				<button id="return-to-platform" class="pixel-btn">Return to Platform</button>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>© 2025 Gamified CV Learning Platform</p>
+			<button id="debug-mode-toggle" class="debug-toggle-btn">Debug</button>
+		</div>
+	</footer>
+
+	<!-- Load configuration first -->
+	<script src="js/game-config.js"></script>
+
+	<!-- Load shared components -->
+	<script src="../shared/js/game-utils.js"></script>
+	<script src="../shared/js/game-debug.js"></script>
+	<script src="../shared/js/key-generator.js"></script>
+	<script src="../shared/js/game-engine.js"></script>
+
+	<!-- Load game-specific scripts -->
+	<script src="js/lessons.js"></script>
+	<script src="js/simulation.js"></script>
+</body>
+
+</html>

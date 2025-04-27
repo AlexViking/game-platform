@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<title>CSS Styling - Learning Game</title>
+	<link rel="stylesheet" href="../shared/css/game-base.css">
+	<link rel="stylesheet" href="../shared/css/pixel-theme.css">
+	<link rel="stylesheet" href="../shared/css/debug.css">
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<h1>CSS Styling</h1>
+			<div class="game-progress">
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 0%"></div>
+				</div>
+				<span class="progress-text">0% Complete</span>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section id="game-intro" class="game-section active">
+			<h2>Welcome to CSS Styling</h2>
+			<p>This game will teach you how to style web pages using CSS (Cascading Style Sheets).</p>
+			<p>Learn about selectors, properties, values, and create beautiful web designs!</p>
+			<button id="start-game" class="pixel-btn">Start Learning</button>
+		</section>
+
+		<section id="lesson-1" class="game-section">
+			<h2>Lesson 1: CSS Basics</h2>
+			<div class="lesson-content">
+				<!-- Content will be loaded dynamically from lessons.js -->
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="quiz-1">Continue to Quiz</button>
+			</div>
+		</section>
+
+		<section id="quiz-1" class="game-section">
+			<h2>Quiz: CSS Fundamentals</h2>
+			<div class="quiz-container">
+				<div class="question">
+					<p>What does CSS stand for?</p>
+					<div class="options">
+						<label class="option">
+							<input type="radio" name="q1" value="cascading"> Cascading Style Sheets
+						</label>
+						<label class="option">
+							<input type="radio" name="q1" value="colorful"> Colorful Style Sheets
+						</label>
+						<label class="option">
+							<input type="radio" name="q1" value="computer"> Computer Style Sheets
+						</label>
+						<label class="option">
+							<input type="radio" name="q1" value="creative"> Creative Style Sheets
+						</label>
+					</div>
+					<div class="feedback"></div>
+				</div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check" data-question="q1" data-answer="cascading">Check Answer</button>
+				<button class="btn btn-next" data-next="lesson-2" style="display: none;">Next Lesson</button>
+			</div>
+		</section>
+
+		<section id="lesson-2" class="game-section">
+			<h2>Lesson 2: Selectors and Properties</h2>
+			<div class="lesson-content">
+				<!-- Content will be loaded dynamically from lessons.js -->
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="practice-1">Practice Exercise</button>
+			</div>
+		</section>
+
+		<section id="practice-1" class="game-section">
+			<h2>Practice: Basic Styling</h2>
+			<div class="practice-container">
+				<div class="instructions">
+					<p>Style the HTML elements according to the requirements:</p>
+					<ul>
+						<li>Make the heading blue</li>
+						<li>Set the paragraph font size to 16px</li>
+						<li>Add a red border to the div</li>
+					</ul>
+				</div>
+				<div class="editor-split-view">
+					<div class="html-editor-container">
+						<div class="editor-header">
+							<span>HTML (Read-only)</span>
+						</div>
+						<textarea id="html-viewer" class="code-viewer" readonly rows="10"><h1>Welcome</h1>
+<p>This is a paragraph.</p>
+<div class="box">
+    This is a box.
+</div></textarea>
+					</div>
+					<div class="css-editor-container">
+						<div class="editor-header">
+							<span>CSS</span>
+						</div>
+						<textarea id="css-editor" class="code-editor" rows="10">/* Add your CSS here */
+</textarea>
+					</div>
+				</div>
+				<div class="preview-container">
+					<div class="preview-header">
+						<span>Preview</span>
+					</div>
+					<iframe id="preview-frame" class="preview-frame"></iframe>
+				</div>
+				<div class="feedback"></div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check-code">Check Code</button>
+				<button class="btn btn-next" data-next="lesson-3" style="display: none;">Next Lesson</button>
+			</div>
+		</section>
+
+		<section id="lesson-3" class="game-section">
+			<h2>Lesson 3: Box Model and Layout</h2>
+			<div class="lesson-content">
+				<!-- Content will be loaded dynamically from lessons.js -->
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-next" data-next="quiz-2">Continue to Quiz</button>
+			</div>
+		</section>
+
+		<section id="quiz-2" class="game-section">
+			<h2>Quiz: Box Model</h2>
+			<div class="quiz-container">
+				<div class="question">
+					<p>Which CSS property controls the space between an element's content and its border?</p>
+					<div class="options">
+						<label class="option">
+							<input type="radio" name="q2" value="margin"> margin
+						</label>
+						<label class="option">
+							<input type="radio" name="q2" value="padding"> padding
+						</label>
+						<label class="option">
+							<input type="radio" name="q2" value="border"> border
+						</label>
+						<label class="option">
+							<input type="radio" name="q2" value="spacing"> spacing
+						</label>
+					</div>
+					<div class="feedback"></div>
+				</div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check" data-question="q2" data-answer="padding">Check Answer</button>
+				<button class="btn btn-next" data-next="challenge" style="display: none;">Final Challenge</button>
+			</div>
+		</section>
+
+		<section id="challenge" class="game-section">
+			<h2>Final Challenge: Style a Web Page</h2>
+			<div class="challenge-container">
+				<div class="challenge-instructions">
+					<h3>Your Task:</h3>
+					<p>Create a styled web page with the following requirements:</p>
+					<ul>
+						<li>Set a background color for the page</li>
+						<li>Style the heading with a custom font size and color</li>
+						<li>Create a card component with padding, margin, and border</li>
+						<li>Style a button with hover effects</li>
+						<li>Use flexbox to center content</li>
+					</ul>
+				</div>
+				<div class="editor-split-view">
+					<div class="html-editor-container">
+						<div class="editor-header">
+							<span>HTML (Read-only)</span>
+						</div>
+						<textarea id="challenge-html" class="code-viewer" readonly rows="15"><div class="container">
+    <h1>My Portfolio</h1>
+    <div class="card">
+        <h2>About Me</h2>
+        <p>I'm a web developer learning CSS.</p>
+        <button class="btn">Contact Me</button>
+    </div>
+</div></textarea>
+					</div>
+					<div class="css-editor-container">
+						<div class="editor-header">
+							<span>CSS</span>
+						</div>
+						<textarea id="challenge-css" class="code-editor" rows="15">/* Style the page here */
+</textarea>
+					</div>
+				</div>
+				<div class="preview-container">
+					<div class="preview-header">
+						<span>Preview</span>
+					</div>
+					<iframe id="challenge-preview" class="preview-frame"></iframe>
+				</div>
+				<div class="feedback"></div>
+			</div>
+			<div class="navigation-buttons">
+				<button class="btn btn-check-challenge">Check Solution</button>
+				<button class="btn btn-complete" style="display: none;">Complete Game</button>
+			</div>
+		</section>
+
+		<section id="game-complete" class="game-section">
+			<h2>Congratulations! 🎉</h2>
+			<p>You've completed the CSS Styling learning game!</p>
+			<div class="achievement-container">
+				<h3>Your Achievement Key</h3>
+				<div class="key-container">
+					<code id="achievement-key"></code>
+					<button id="copy-key" class="btn btn-small">Copy</button>
+				</div>
+				<p>This key will be automatically sent to your CV when you return to the platform.</p>
+			</div>
+			<div class="navigation-buttons">
+				<button id="return-to-platform" class="pixel-btn">Return to Platform</button>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>© 2025 Gamified CV Learning Platform</p>
+			<button id="debug-mode-toggle" class="debug-toggle-btn">Debug</button>
+		</div>
+	</footer>
+
+	<!-- Load configuration first -->
+	<script src="js/game-config.js"></script>
+
+	<!-- Load shared components -->
+	<script src="../shared/js/game-utils.js"></script>
+	<script src="../shared/js/game-debug.js"></script>
+	<script src="../shared/js/key-generator.js"></script>
+	<script src="../shared/js/game-engine.js"></script>
+
+	<!-- Load game-specific scripts -->
+	<script src="js/lessons.js"></script>
+	<script src="js/css-editor.js"></script>
+</body>
+
+</html>

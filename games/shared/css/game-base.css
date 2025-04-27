@@ -1,0 +1,424 @@
+/* Base Game Styles */
+
+/* Root Variables */
+:root {
+    --bg-color: #0f0f1b;
+    --text-color: #e0e0ff;
+    --primary-color: #8b5cf6;
+    --secondary-color: #10b981;
+    --accent-color: #f43f5e;
+    --dark-color: #1e1b2e;
+    --border-color: #293244;
+    
+    /* Section specific colors */
+    --skills-color: #8b5cf6;
+    --experience-color: #10b981;
+    --education-color: #f43f5e;
+    --projects-color: #f59e0b;
+    --journey-color: #3b82f6;
+    
+    /* Game-specific colors */
+    --html-color: #e34c26;
+    --css-color: #264de4;
+    --js-color: #f7df1e;
+    --internet-color: #3b82f6;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    image-rendering: pixelated;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    padding: 30px 0;
+    margin-bottom: 40px;
+    border-bottom: 4px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 32px;
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.game-progress {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 16px;
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.progress-fill {
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--primary-color) 10px,
+        var(--skills-color) 10px,
+        var(--skills-color) 20px
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.7);
+}
+
+.progress-text {
+    font-size: 10px;
+    margin-top: 5px;
+    text-align: right;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Game Sections */
+.game-section {
+    display: none;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 2px solid var(--border-color);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+    background-color: rgba(30, 27, 46, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 6px;
+    background-color: var(--primary-color);
+}
+
+.game-section.active {
+    display: block;
+    animation: pixelFadeIn 0.5s ease;
+}
+
+@keyframes pixelFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.game-section h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+/* Lesson Content */
+.lesson-content {
+    margin-bottom: 20px;
+}
+
+.lesson-content p {
+    margin-bottom: 15px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.lesson-content ul {
+    list-style: none;
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.lesson-content li {
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 12px;
+}
+
+.lesson-content li::before {
+    content: '▶';
+    position: absolute;
+    left: -20px;
+    color: var(--primary-color);
+}
+
+/* Quiz Styles */
+.quiz-container, .challenge-container {
+    background-color: rgba(24, 22, 36, 0.8);
+    border: 2px solid var(--border-color);
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.option:hover {
+    background-color: rgba(139, 92, 246, 0.2);
+    border-color: var(--primary-color);
+}
+
+.option input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    background-color: var(--dark-color);
+    position: relative;
+    cursor: pointer;
+}
+
+.option input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(139, 92, 246, 0.7);
+}
+
+.feedback {
+    padding: 10px;
+    border: 2px solid;
+    margin-top: 10px;
+    display: none;
+    font-size: 10px;
+    animation: pixelGlitch 0.5s;
+}
+
+.feedback.correct {
+    background-color: rgba(16, 185, 129, 0.2);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.feedback.incorrect {
+    background-color: rgba(244, 63, 94, 0.2);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+@keyframes pixelGlitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); }
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--dark-color);
+    border: 2px solid var(--primary-color);
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    background-color: var(--primary-color);
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 10px;
+}
+
+.btn-next {
+    border-color: var(--secondary-color);
+}
+
+.btn-next:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-check, .btn-check-code, .btn-check-challenge {
+    border-color: var(--journey-color);
+}
+
+.btn-check:hover, .btn-check-code:hover, .btn-check-challenge:hover {
+    background-color: var(--journey-color);
+}
+
+.btn-complete {
+    border-color: var(--experience-color);
+    background-color: rgba(16, 185, 129, 0.2);
+}
+
+.btn-complete:hover {
+    background-color: var(--experience-color);
+}
+
+/* Achievement Key Display */
+.achievement-container {
+    background-color: rgba(24, 22, 36, 0.8);
+    border: 2px solid var(--border-color);
+    padding: 20px;
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.achievement-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 6px;
+    background-color: var(--accent-color);
+}
+
+.achievement-container h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+.key-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    background-color: var(--dark-color);
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    overflow-x: auto;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#achievement-key {
+    font-family: monospace;
+    word-break: break-all;
+    font-size: 10px;
+    color: var(--primary-color);
+}
+
+/* Code and Editor */
+pre, code {
+    font-family: monospace;
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 0;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    image-rendering: pixelated;
+}
+
+pre {
+    padding: 15px;
+    overflow-x: auto;
+    margin: 15px 0;
+}
+
+code {
+    padding: 2px 4px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 60px;
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    border-top: 4px solid var(--border-color);
+    font-size: 10px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 24px;
+    }
+    
+    .game-section h2 {
+        font-size: 18px;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .btn {
+        margin: 5px 0;
+    }
+}

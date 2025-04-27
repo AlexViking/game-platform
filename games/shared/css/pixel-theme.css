@@ -1,0 +1,386 @@
+/* Pixel Theme Specific Styles for Games */
+
+/* Pixel Fonts and Textures */
+body {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+}
+
+/* Pixel Buttons */
+.pixel-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--dark-color);
+    border: 2px solid var(--primary-color);
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+}
+
+.pixel-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    background-color: var(--primary-color);
+}
+
+/* Pixel Inputs */
+.pixel-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    outline: none;
+}
+
+.pixel-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(139, 92, 246, 0.5);
+}
+
+/* Interactive Elements */
+.interactive-diagram, .http-demo, .browser-workflow {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(24, 22, 36, 0.8);
+    border: 2px solid var(--border-color);
+    position: relative;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.interactive-diagram::before, 
+.http-demo::before, 
+.browser-workflow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 6px;
+    background-color: var(--internet-color);
+}
+
+.workflow-step {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.step-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--internet-color);
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* HTTP Simulation */
+.interactive-simulation {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(24, 22, 36, 0.8);
+    border: 2px solid var(--border-color);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.interactive-simulation::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 6px;
+    background-color: var(--internet-color);
+}
+
+.simulation-stage {
+    height: 200px;
+    position: relative;
+    margin: 20px 0;
+    border: 2px solid var(--border-color);
+    background-color: var(--dark-color);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sim-browser, .sim-server {
+    background-color: rgba(30, 27, 46, 0.8);
+    border: 2px solid var(--border-color);
+    padding: 10px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.sim-browser {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 160px;
+}
+
+.sim-server {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    text-align: center;
+}
+
+.sim-browser-bar {
+    background-color: var(--dark-color);
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.sim-url {
+    font-size: 8px;
+    width: 100%;
+    display: block;
+    padding: 3px;
+    background-color: rgba(24, 22, 36, 0.8);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.simulation-log {
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.log-entry {
+    margin-bottom: 5px;
+}
+
+.log-time {
+    color: var(--accent-color);
+}
+
+.log-info {
+    color: var(--internet-color);
+}
+
+.log-success {
+    color: var(--secondary-color);
+}
+
+.log-error {
+    color: var(--accent-color);
+}
+
+.server-icon, .device-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.server-status {
+    font-size: 8px;
+    padding: 4px;
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Network Packet Animation */
+.sim-request-packet, .sim-response-packet {
+    position: absolute;
+    background-color: var(--primary-color);
+    padding: 4px 8px;
+    font-size: 8px;
+    border: 2px solid var(--dark-color);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    display: none;
+    z-index: 10;
+}
+
+.packet-label {
+    color: var(--dark-color);
+    font-weight: bold;
+}
+
+/* Pixel Diagram Placeholder */
+.pixel-diagram {
+    width: 100%;
+    height: 200px;
+    background-color: var(--dark-color);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* HTTP Flow Visualization */
+.http-flow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.http-client, .http-server {
+    text-align: center;
+}
+
+.http-arrows {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.arrow-right, .arrow-left {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.arrow-body {
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+.arrow-label {
+    font-size: 10px;
+}
+
+/* Pixel Loader */
+.pixel-loader {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pixel-box {
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    animation: pixelBounce 0.6s infinite alternate;
+}
+
+.pixel-box:nth-child(2) { animation-delay: 0.2s; }
+.pixel-box:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes pixelBounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+/* Pixel Notification */
+.notification {
+    border-radius: 0;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
+    font-family: 'Press Start 2P', monospace;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Debug Toggle Button */
+.debug-toggle-btn {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    padding: 4px 8px;
+    font-size: 8px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    transition: all 0.3s;
+}
+
+.debug-toggle-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    border-color: var(--primary-color);
+}
+
+/* Pixel Select */
+select {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 5px;
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Pixel Effects */
+.pixel-glow {
+    animation: pixelGlow 2s infinite;
+}
+
+@keyframes pixelGlow {
+    0% { box-shadow: 0 0 5px var(--primary-color); }
+    50% { box-shadow: 0 0 20px var(--primary-color); }
+    100% { box-shadow: 0 0 5px var(--primary-color); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .http-flow {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .http-arrows {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .simulation-stage {
+        height: 300px;
+    }
+    
+    .sim-browser, .sim-server {
+        position: static;
+        transform: none;
+        margin: 10px auto;
+    }
+}
