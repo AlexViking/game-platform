@@ -8,6 +8,22 @@ class PlatformRouter {
 		this.initialize();
 	}
 
+	// initialize() {
+	// 	// Load student data from URL or localStorage
+	// 	this.loadStudentData();
+
+	// 	// Set up event listeners
+	// 	this.setupEventListeners();
+
+	// 	// Check if returning from a game
+	// 	this.checkForGameReturn();
+
+	// 	// Initialize progress display
+	// 	this.updateProgressDisplay();
+
+	// 	window.debug.log('Platform router initialized', 'info');
+	// }
+
 	initialize() {
 		// Load student data from URL or localStorage
 		this.loadStudentData();
@@ -18,11 +34,34 @@ class PlatformRouter {
 		// Check if returning from a game
 		this.checkForGameReturn();
 
+		// Update available games based on completed games
+		this.updateAvailableGames();
+
 		// Initialize progress display
 		this.updateProgressDisplay();
 
 		window.debug.log('Platform router initialized', 'info');
 	}
+
+	// loadStudentData() {
+	// 	const urlParams = new URLSearchParams(window.location.search);
+
+	// 	this.studentData = {
+	// 		studentId: urlParams.get('student') || localStorage.getItem('studentId'),
+	// 		completedGames: JSON.parse(urlParams.get('completed') || '[]'),
+	// 		returnUrl: urlParams.get('return_url') || localStorage.getItem('cvReturnUrl')
+	// 	};
+
+	// 	// Store data for later use
+	// 	if (this.studentData.studentId) {
+	// 		localStorage.setItem('studentId', this.studentData.studentId);
+	// 	}
+	// 	if (this.studentData.returnUrl) {
+	// 		localStorage.setItem('cvReturnUrl', this.studentData.returnUrl);
+	// 	}
+
+	// 	window.debug.log('Student data loaded', 'info', this.studentData);
+	// }
 
 	loadStudentData() {
 		const urlParams = new URLSearchParams(window.location.search);
@@ -33,12 +72,19 @@ class PlatformRouter {
 			returnUrl: urlParams.get('return_url') || localStorage.getItem('cvReturnUrl')
 		};
 
+		// Also get completed games from localStorage and merge
+		const storedCompletedGames = JSON.parse(localStorage.getItem('completedGames') || '[]');
+		this.studentData.completedGames = [...new Set([...this.studentData.completedGames, ...storedCompletedGames])];
+
 		// Store data for later use
 		if (this.studentData.studentId) {
 			localStorage.setItem('studentId', this.studentData.studentId);
 		}
 		if (this.studentData.returnUrl) {
 			localStorage.setItem('cvReturnUrl', this.studentData.returnUrl);
+		}
+		if (this.studentData.completedGames.length > 0) {
+			localStorage.setItem('completedGames', JSON.stringify(this.studentData.completedGames));
 		}
 
 		window.debug.log('Student data loaded', 'info', this.studentData);
@@ -62,6 +108,22 @@ class PlatformRouter {
 		}
 	}
 
+	// handleGameCompletion(gameId, key) {
+	// 	window.debug.log(`Game completed: ${gameId}`, 'success');
+
+	// 	// Update completed games
+	// 	if (!this.studentData.completedGames.includes(gameId)) {
+	// 		this.studentData.completedGames.push(gameId);
+	// 		localStorage.setItem('completedGames', JSON.stringify(this.studentData.completedGames));
+	// 	}
+
+	// 	// Show return to CV option
+	// 	this.showReturnToCV(key);
+
+	// 	// Update available games
+	// 	this.updateAvailableGames();
+	// }
+
 	handleGameCompletion(gameId, key) {
 		window.debug.log(`Game completed: ${gameId}`, 'success');
 
@@ -76,6 +138,9 @@ class PlatformRouter {
 
 		// Update available games
 		this.updateAvailableGames();
+
+		// Update progress display
+		this.updateProgressDisplay();
 	}
 
 	showReturnToCV(key) {
@@ -162,11 +227,43 @@ class PlatformRouter {
 		);
 	}
 
+	// updateAvailableGames() {
+	// 	// Update each game item based on completion status
+	// 	Object.entries(PLATFORM_CONFIG.GAMES).forEach(([gameId, game]) => {
+	// 		const gameElement = this.findGameElement(game.title);
+	// 		if (!gameElement) return;
+
+	// 		const canAccess = this.checkPrerequisites(gameId);
+	// 		const isCompleted = this.studentData.completedGames.includes(gameId);
+
+	// 		if (canAccess || isCompleted) {
+	// 			gameElement.classList.remove('locked');
+	// 			gameElement.classList.add('available');
+
+	// 			// Replace lock with button
+	// 			const lockSpan = gameElement.querySelector('.game-lock');
+	// 			if (lockSpan) {
+	// 				const button = document.createElement('button');
+	// 				button.className = 'game-link';
+	// 				button.textContent = isCompleted ? 'Play Again' : 'Start Game';
+	// 				button.onclick = () => this.startGame(gameId);
+	// 				lockSpan.parentNode.replaceChild(button, lockSpan);
+	// 			}
+	// 		}
+	// 	});
+
+	// 	// Update path status
+	// 	this.updatePathStatus();
+	// }
+
 	updateAvailableGames() {
 		// Update each game item based on completion status
 		Object.entries(PLATFORM_CONFIG.GAMES).forEach(([gameId, game]) => {
 			const gameElement = this.findGameElement(game.title);
-			if (!gameElement) return;
+			if (!gameElement) {
+				window.debug.log(`Game element not found for ${game.title}`, 'warning');
+				return;
+			}
 
 			const canAccess = this.checkPrerequisites(gameId);
 			const isCompleted = this.studentData.completedGames.includes(gameId);
@@ -184,6 +281,9 @@ class PlatformRouter {
 					button.onclick = () => this.startGame(gameId);
 					lockSpan.parentNode.replaceChild(button, lockSpan);
 				}
+			} else {
+				gameElement.classList.add('locked');
+				gameElement.classList.remove('available');
 			}
 		});
 
