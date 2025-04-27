@@ -104,8 +104,8 @@ class GameEngine {
 			});
 		}
 
-		// Return to platform button
-		const returnButton = document.getElementById('return-to-platform');
+		// Return to platform or CV button
+		const returnButton = document.getElementById('return-to-CV');
 		if (returnButton) {
 			returnButton.addEventListener('click', () => {
 				this.returnToPlatform();
@@ -281,7 +281,25 @@ class GameEngine {
 	returnToPlatform() {
 		const achievementKey = document.getElementById('achievement-key').textContent;
 
-		if (this.gameState.platformReturnUrl) {
+		// Check if we should return directly to CV
+		if (this.gameState.cvReturnUrl) {
+			const cvUrl = new URL(this.gameState.cvReturnUrl);
+			cvUrl.searchParams.append('source', GAME_CONFIG.id);
+			cvUrl.searchParams.append('key', achievementKey);
+
+			window.debug.log('Returning directly to CV', 'info', {
+				url: cvUrl.toString()
+			});
+
+			window.debug.trackNavigation(`Game: ${GAME_CONFIG.title}`, 'CV Template', {
+				completed: true,
+				key: achievementKey
+			});
+
+			window.location.href = cvUrl.toString();
+		}
+		// Fallback to platform return
+		else if (this.gameState.platformReturnUrl) {
 			const returnUrl = new URL(this.gameState.platformReturnUrl);
 			returnUrl.searchParams.append('source', GAME_CONFIG.id);
 			returnUrl.searchParams.append('completed', 'true');
